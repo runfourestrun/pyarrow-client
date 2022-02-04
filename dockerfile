@@ -9,6 +9,11 @@ RUN apt-get update && apt-get install -y python3.9 python3.9-dev \
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-COPY /app /usr/local/app
 
-ENV PYTHONPATH=usr/local/app/pyarrow:usr/local/app/pyarrow/pyarrow:$PYTHONPATH
+ENV PYTHONPATH=/usr/local/app:$PYTHONPATH
+
+WORKDIR /usr/local/app/app
+
+
+CMD ["main.py"]
+ENTRYPOINT ["python3"]
